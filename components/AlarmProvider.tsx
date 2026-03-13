@@ -61,6 +61,7 @@ export function useGas(): GasSnapshot {
   return useSyncExternalStore(gasStore.subscribe, gasStore.getSnapshot, () => ({
     gasGwei: null,
     status: "DEGRADED" as const,
+    regime: "UNKNOWN" as const,
     lastUpdated: null,
     errorCount: 0,
   }));

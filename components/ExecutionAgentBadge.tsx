@@ -30,7 +30,7 @@ export function ExecutionAgentBadge() {
         )}
         {gasOk && gas.gasGwei != null && (
           <div className="text-[9px] font-mono text-white/30 mt-0.5">
-            Gas: {gas.gasGwei.toFixed(1)} gwei
+            Gas Regime: {gas.regime} ({gas.gasGwei.toFixed(3)} Gwei)
           </div>
         )}
       </div>

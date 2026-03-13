@@ -85,7 +85,7 @@ export function IntentList({
               <div className="text-white/50">
                 → {REASON_LABELS[intent.reason] ?? intent.reason}
                 {intent.reason === "waiting_gas" && gasGwei != null && (
-                  <span> (current: {gasGwei.toFixed(1)} gwei, need ≤{intent.maxGasGwei})</span>
+                  <span> (current: {gasGwei.toFixed(3)} gwei, need ≤{intent.maxGasGwei})</span>
                 )}
               </div>
             )}

@@ -4,17 +4,30 @@ import { nextDelayMs } from "@/lib/utils/backoff";
 
 export type GasStatus = "OK" | "DEGRADED";
 
+export type GasRegime = "OPTIMAL" | "GHOST_TOWN" | "NORMAL" | "ELEVATED" | "UNKNOWN";
+
 export type GasSnapshot = {
   gasGwei: number | null;
   status: GasStatus;
+  regime: GasRegime;
   lastUpdated: number | null;
   errorCount: number;
   lastError?: string;
 };
 
+/** Classify gas price into regime buckets (0.03 Gwei baseline) */
+export function classifyGasRegime(gasGwei: number | null): GasRegime {
+  if (gasGwei == null) return "UNKNOWN";
+  if (gasGwei < 0.035) return "OPTIMAL";
+  if (gasGwei < 0.05) return "GHOST_TOWN";
+  if (gasGwei < 0.1) return "NORMAL";
+  return "ELEVATED";
+}
+
 const INITIAL: GasSnapshot = {
   gasGwei: null,
   status: "DEGRADED",
+  regime: "UNKNOWN",
   lastUpdated: null,
   errorCount: 0,
 };
@@ -70,6 +83,7 @@ export class GasStore {
       this.snapshot = {
         gasGwei,
         status: "OK",
+        regime: classifyGasRegime(gasGwei),
         lastUpdated: Date.now(),
         errorCount: 0,
       };

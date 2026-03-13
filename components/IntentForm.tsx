@@ -25,7 +25,7 @@ export function IntentForm({
   const [amount, setAmount] = useState("100");
   const [maxSlippageBps, setMaxSlippageBps] = useState(50);
   const [triggerVibe, setTriggerVibe] = useState<VibeScore>("CAPITULATION");
-  const [maxGasGwei, setMaxGasGwei] = useState(30);
+  const [maxGasGwei, setMaxGasGwei] = useState(0.03);
   const [expiryHours, setExpiryHours] = useState(24);
 
   const handleSubmit = useCallback(
@@ -100,7 +100,9 @@ export function IntentForm({
             type="number"
             value={maxGasGwei}
             onChange={(e) => setMaxGasGwei(Number(e.target.value))}
-            min={1}
+            min={0.01}
+            max={0.05}
+            step={0.005}
             className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-white/80 font-mono focus:outline-none focus:border-white/30"
           />
         </div>

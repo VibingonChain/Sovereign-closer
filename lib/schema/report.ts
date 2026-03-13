@@ -11,7 +11,7 @@ export const VibeScoreSchema = z.enum([
 export const VibeReportSchema = z.object({
   score: VibeScoreSchema,
   confidence: z.number().min(0).max(100),
-  networkRegime: z.enum(["GHOST_TOWN", "HEALTHY", "CONGESTED", "UNKNOWN"]),
+  networkRegime: z.enum(["OPTIMAL", "GHOST_TOWN", "NORMAL", "ELEVATED", "UNKNOWN"]),
   timestamp: z.number(),
 });
 

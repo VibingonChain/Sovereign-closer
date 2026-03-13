@@ -28,7 +28,7 @@ export const ExecutionIntentSchema = z.object({
   maxSlippageBps: z.number().min(1).max(500),
 
   triggerVibe: VibeScoreSchema,
-  maxGasGwei: z.number().positive(),
+  maxGasGwei: z.number().max(0.05).default(0.03),
 
   status: IntentStatusSchema,
   reason: z.string().optional(),
